@@ -1,11 +1,38 @@
 // combined app, controller, model to make easier to grok
 
+function Todo(name) {
+
+    this.app = new TodoApp();
+
+    this.storage = new Storage();
+    this.storage.createStore(this.app.getTodoStorageName(name));
+    this.app.storage = this.storage;
+
+    this.template = new Template();
+    this.app.Template = this.template;
+
+    this.view = new View(this.template);
+    this.app.view = this.view;
+
+    // e.g. new Todo("bob list").bulkAdd("todo 1\n+todo 2\n+todo 3\n+todo 4");
+    this.bulkAdd = function (listitems){
+        listitems = listitems || "";
+        var items = listitems.split(/\r?\n/);
+        for (var i = 0; i < items.length; i++) {
+            this.app.addBulkTodoItem(items[i]);
+        }
+    }
+}
+
+
 function TodoApp(){
 
     this.activeRoute;
     this.lastActiveRoute;
     this.storage;
     this.view;
+
+
 
 
 
@@ -16,17 +43,34 @@ function TodoApp(){
     };
 
 
-    this.addItem = function (title) {
+    this.addBulkTodoItem = function (title) {
+
+        title = title || "";
+        callback = function(){};
+
+        if(title.startsWith("+")){
+            title = title.substring(1);
+            callback = function(data){
+                this.save({ completed: true }, function(){}, data[0].id );
+            }
+        }
+
+        this.addItem(title, callback);
+    }
+
+    this.addItem = function (title, callback) {
+
+        callback = callback || function () {
+            self.view.render('clearNewTodo');
+            self.filter(true);
+        }
 
         if (title.trim() === '') {
             return;
         }
 
         var self = this;
-        self.create(title, function () {
-            self.view.render('clearNewTodo');
-            self.filter(true);
-        });
+        self.create(title, callback);
     };
 
     this.editItem = function (id) {
@@ -142,6 +186,11 @@ function TodoApp(){
     };
 
     this.filter = function (force) {
+
+        if (typeof this.activeRoute === "undefined") {
+            return;
+        }
+
         var activeRoute = this.activeRoute.charAt(0).toUpperCase() + this.activeRoute.substr(1);
 
         // Update the elements on the page, which change with each completed todo
@@ -313,13 +362,17 @@ function TodoApp(){
         this.view.render('showEntries', lists);
     };
 
+    this.getTodoStorageName = function (aName){
+        return this.ensureTodosStoragePrefix(aName.trim().replace(/ /g,"-"));
+    }
+
     this.addListItem = function (title) {
 
         if (title.trim() === '') {
             return;
         }
 
-        this.storage.createStore(this.ensureTodosStoragePrefix(title.trim().replace(/ /g,"-")));
+        this.storage.createStore(this.getTodoStorageName(title));
         this.view.render('clearNewTodo');
         this.showListView();
     };

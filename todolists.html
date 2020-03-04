@@ -39,24 +39,6 @@
 // replicating as much of todomvc as is necessary for simple console and web automating
 window.app = window.app || {};
 
-
-
-function Todo(name) {
-
-    this.app = new TodoApp();
-
-    this.storage = new Storage();
-    this.storage.createStore(name);
-    this.app.storage = this.storage;
-
-    this.template = new Template();
-    this.app.Template = this.template;
-
-    this.view = new View(this.template);
-    this.app.view = this.view;
-
-}
-
 var todo = new Todo('todos-eviltester');
 window.app = todo.app;
 

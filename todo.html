@@ -56,30 +56,13 @@
 // replicating as much of todomvc as is necessary for simple console and web automating
 window.app = window.app || {};
 
-
-
-function Todo(name) {
-
-    this.app = new TodoApp();
-
-    this.storage = new Storage();
-    this.storage.createStore(name);
-    this.app.storage = this.storage;
-
-    this.template = new Template();
-    this.app.Template = this.template;
-
-    this.view = new View(this.template);
-    this.app.view = this.view;
-
-}
-
 // get the list name 'eviltester' from a param, and if not exist then use default list 'eviltester'
 var params = document.location.hash.split("&");
 var filter = params[0] || "";
 var todoListName = params[1] || "eviltester";
 
 var todo = new Todo('todos-' + todoListName);
+
 window.app = todo.app;
 
 
