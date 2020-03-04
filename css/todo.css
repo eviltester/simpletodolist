@@ -21,3 +21,63 @@ button.destroy:after {
     line-height: 1.5em;
     text-align: center;
 }
+
+section.todoapp{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.5em;
+}
+
+/* create a heading */
+section.todoapp h1{
+    background-color: #e9e8e4;
+    text-align: center;
+}
+
+/* default create a todo list markup to make visible */
+.new-todo-list{
+    background-color: azure;
+    font-size: 1.8em;
+    width: 100%;
+}
+
+/* default create a todo markup to make visible */
+.new-todo{
+    background-color: azure;
+    font-size: 1.6em;
+    width: 50%;
+    margin: 1em;
+}
+
+/* the main list of todos view */
+.main{
+    border: gainsboro;
+    border-width: 1px;
+    border-style: dotted;
+    margin: 0.5em;
+    padding: 0.5em;
+    background-color: #f7f0da;
+}
+
+/* indent the label */
+li > div.view > label{
+    margin: 0.5em;
+}
+
+/* strike through todo when complete */
+li.completed label{
+    text-decoration: line-through ;
+
+}
+
+/* move the delete button off to the right */
+button.destroy{
+    float: right;
+}
+
+/* a hover border so delete button is easier to associate with a particular todo */
+li > div.view:hover{
+    border-width: 1px;
+    border-style: dashed;
+}
