@@ -31,20 +31,20 @@ section.todoapp{
 
 /* create a heading */
 section.todoapp h1{
-    background-color: #e9e8e4;
+    background-color: #B4B6AA;
     text-align: center;
 }
 
 /* default create a todo list markup to make visible */
 .new-todo-list{
-    background-color: azure;
+    background-color: #E7E3EE;
     font-size: 1.8em;
     width: 100%;
 }
 
 /* default create a todo markup to make visible */
 .new-todo{
-    background-color: azure;
+    background-color: #E7E3EE;
     font-size: 1.6em;
     width: 50%;
     margin: 1em;
@@ -57,7 +57,7 @@ section.todoapp h1{
     border-style: dotted;
     margin: 0.5em;
     padding: 0.5em;
-    background-color: #f7f0da;
+    background-color: #F0F0F0;
 }
 
 /* indent the label */
