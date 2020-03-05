@@ -42,6 +42,7 @@ function Admin(){
         return document.cookie.indexOf('loggedin=')!=-1;
     }
 
+    // TODO: too tightly coupled to GUI
     this.activateLoginLink= function(){
 
         if(this.isLoggedIn()){
