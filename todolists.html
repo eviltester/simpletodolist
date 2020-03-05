@@ -20,7 +20,13 @@
 
 <section class="todoapp">
     <header class="header">
-        <h1>todos List Management</h1>
+
+            <nav>[<a id="navtodolists" href="todolists.html">lists</a>]
+                [<a id="navadminlogin" href="adminlogin.html">Admin Login</a>]
+                    [<a id="navadminlogout" onclick="new Admin().logout();">Logout</a>]
+            </nav>
+
+            <h1>todos List Management</h1>
         <input class="new-todo-list" placeholder="Enter new todo list name here" autofocus="">
     </header>
     <section class="main" style="display: block;">
@@ -33,6 +39,7 @@
 <script src="js/listmanagementtemplate.js"></script>
 <script src="js/listmanagementview.js"></script>
 <script src="js/todoapp.js"></script>
+<script src="js/admin.js"></script>
 
 <script>
 
@@ -52,7 +59,7 @@ window.addEventListener('hashchange', setView);
 
 todo.app.bindListGuiEvents();
 
-
+new Admin().activateLoginLink();
 
 
 </script>

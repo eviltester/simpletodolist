@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head><title>Todo (based on TodoMVC)</title>
+    <link rel="stylesheet" type="text/css" href="css/todo.css">
+    <script src="js/admin.js"></script>
+</head>
+<body>
+
+
+<section class="todoapp">
+    <header class="header">
+        <nav>[<a id="navtodolists" href="todolists.html">lists</a>]
+            [<a id="navadminlogin" href="adminlogin.html">Admin Login</a>]
+            [<a id="navadminlogout">Logout</a>]
+        </nav>
+
+        <h1>Admin Login</h1>
+    </header>
+
+    <section class="main" style="display: block;">
+
+        <form onsubmit="return loginas();">
+            <div class="login">
+                <label for="username"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="username" required>
+                <br>
+                <label for="password"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password" required>
+                <br>
+                <button id="login" type="submit">Login</button>
+                <br>
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+            </div>
+        </form>
+        <h2 class="loginmessage"></h2>
+
+    </section>
+</section>
+
+<p>PS: Admin / AdminPass</p>
+<script>
+
+
+function loginas(){
+
+    var username = document.getElementsByName("username")[0].value;
+    var password = document.getElementsByName("password")[0].value;
+    var remember = document.getElementsByName("remember")[0].value=="on" ? true : false;
+
+    admin = new Admin();
+    admin.login(username, password, remember, function(){
+        document.getElementsByClassName("loginmessage")[0].innerHTML = "Login Details Incorrect";
+    });
+
+    return false;
+}
+
+new Admin().activateLoginLink();
+
+if(new Admin().isLoggedIn()){
+    window.location.href = "adminview.html";
+}
+
+
+</script>
+
+</body>
+</html>

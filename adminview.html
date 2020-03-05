@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head><title>Todo (based on TodoMVC)</title>
+    <link rel="stylesheet" type="text/css" href="css/todo.css">
+    <script src="js/store.js"></script>
+    <script src="js/listmanagementtemplate.js"></script>
+    <script src="js/listmanagementview.js"></script>
+    <script src="js/todoapp.js"></script>
+    <script src="js/admin.js"></script>
+</head>
+<body>
+
+
+<section class="todoapp">
+    <header class="header">
+        <header class="header">
+            <nav>[<a id="navtodolists" href="todolists.html">lists</a>]
+                [<a id="navadminlogin" href="adminlogin.html">Admin Login</a>]
+                    [<a id="navadminlogout" onclick="new Admin().logout();" href="">Logout</a>]
+            </nav>
+
+            <h1>Admin View</h1>
+    </header>
+    <section class="main" style="display: block;">
+        <ul class="todo-list-list" id="reportlist">
+        </ul>
+    </section>
+</section>
+
+<script>
+
+    if(!(new Admin().isLoggedIn())){
+        window.location.href = "adminlogin.html";
+    }
+
+
+    function loginas(){
+
+        var username = document.getElementsByName("username")[0].value;
+        var password = document.getElementsByName("password")[0].value;
+        var remember = document.getElementsByName("remember")[0].value;
+
+        admin = new Admin();
+        admin.login(username, password, remember, function(){
+            document.getElementsByClassName("loginmessage")[0].innerHTML = "Login Details Incorrect";
+        });
+
+        return false;
+    }
+
+    new Admin().activateLoginLink();
+
+    var data = new Storage().listStores();
+    var lists = [];
+    data.forEach(
+        function(element){
+            if(element.startsWith("todos-")){
+                lists.push(element.substring("todos-".length));
+            }
+        }
+    );
+
+    lists.forEach(function(alist){
+        console.log(alist);
+        var todo = new Todo(alist);
+        todo.app.getCount(function(aCount){
+            li = document.createElement("li");
+            li.innerHTML = "<a id='" + alist + "' href='todo.html#/&" + alist + "'>" + alist + "</a> " + JSON.stringify(aCount);
+            console.log(alist);console.log(aCount);
+            document.getElementById("reportlist").appendChild(li);
+        })
+    })
+
+
+
+</script>
+
+</body>
+</html>

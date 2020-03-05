@@ -32,10 +32,6 @@ function TodoApp(){
     this.storage;
     this.view;
 
-
-
-
-
     this.setView = function (locationHash) {
         var route = locationHash.split('/')[1];
         var page = route || '';

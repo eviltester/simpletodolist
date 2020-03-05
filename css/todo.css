@@ -91,3 +91,11 @@ li > div.view:hover{
     border-width: 1px;
     border-style: dashed;
 }
+
+.login{
+    text-align: center;
+}
+.login button{
+    font-size: 1.5em;
+    margin: 0.5em;
+}
