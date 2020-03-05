@@ -22,11 +22,20 @@ button.destroy:after {
     text-align: center;
 }
 
-section.todoapp{
-    width: 50%;
+section.todoapp {
+    width: 1000px;
     margin-left: auto;
     margin-right: auto;
     font-size: 1.5em;
+}
+
+@media only screen and (max-width: 1020px) {
+    section.todoapp {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 1.5em;
+    }
 }
 
 /* create a heading */
@@ -46,8 +55,9 @@ section.todoapp h1{
 .new-todo{
     background-color: #E7E3EE;
     font-size: 1.6em;
-    width: 50%;
-    margin: 1em;
+    width: 75%;
+    margin-left: 12%;
+    margin-right: auto;
 }
 
 /* the main list of todos view */

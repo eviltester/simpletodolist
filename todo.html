@@ -20,8 +20,8 @@
 <section class="todoapp">
     <header class="header">
         <nav>[<a href="todolists.html">lists</a>]</nav>
-        <h1>todos</h1>
-        <input class="new-todo" placeholder="Enter todo text here" autofocus="">
+        <h1 id="todostitle">todos</h1>
+        <input class="new-todo" placeholder="Enter new todo text here" autofocus="">
     </header>
     <section class="main" style="display: block;">
         <input id="toggle-all" class="toggle-all" type="checkbox">
@@ -64,6 +64,8 @@ var todoListName = params[1] || "eviltester";
 var todo = new Todo('todos-' + todoListName);
 
 window.app = todo.app;
+
+document.getElementById("todostitle").innerText="TODOs : " + todoListName.replace(/-/g, " ");
 
 
 setView = function() {
