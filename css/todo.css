@@ -70,6 +70,12 @@ section.todoapp h1{
     background-color: #F0F0F0;
 }
 
+/* fix bug where buttons started to embed between each other */
+
+div.view{
+    clear:both;
+}
+
 /* indent the label */
 li > div.view > label{
     margin: 0.5em;
